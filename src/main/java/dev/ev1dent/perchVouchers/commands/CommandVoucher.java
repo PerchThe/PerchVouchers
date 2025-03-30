@@ -21,8 +21,6 @@ public class CommandVoucher implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!sender.hasPermission("perchvouchers.voucher")) return true;
-
         switch (args[0].toLowerCase()) {
             case "give": {
                 if (args.length < 4) return false;
