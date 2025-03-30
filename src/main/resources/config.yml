@@ -1,0 +1,10 @@
+armor:
+  name: "<gradient:#FEC300:#FFFF3A>Modifier</gradient> <dark_grey>|</dark_grey> <gradient:#FEC300:#FFFF3A>Unbreakable</gradient> <white>armor piece"
+  lore:
+    - "<white>Use on any armor piece to"
+    - "<white>make it unbreakable!"
+tools:
+  name: "<gradient:#FEC300:#FFFF3A>Modifier</gradient> <dark_grey>|</dark_grey> <gradient:#FEC300:#FFFF3A>Unbreakable</gradient> <white>tools"
+  lore:
+    - "<white>Use on any tool to"
+    - "<white>make it unbreakable!"
