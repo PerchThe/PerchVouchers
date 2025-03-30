@@ -44,6 +44,7 @@ public class CommandVoucher implements CommandExecutor {
                                 player.getWorld().dropItem(player.getLocation(), tool);
                             }
                         }
+                        sender.sendMessage(Utils.formatMM(String.format("<green>Successfully gave %s %s %s voucher(s)", player.getName(), amount, args[2].toLowerCase())));
                         return true;
                     }
                     case "armor": {
@@ -58,6 +59,7 @@ public class CommandVoucher implements CommandExecutor {
                                 player.getWorld().dropItem(player.getLocation(), armor);
                             }
                         }
+                        sender.sendMessage(Utils.formatMM(String.format("<green>Successfully gave %s %s %s voucher(s)", player.getName(), amount, args[2].toLowerCase())));
                         return true;
                     }
                     default: {
@@ -65,6 +67,7 @@ public class CommandVoucher implements CommandExecutor {
                     }
                 }
             }
+            case "reload":
 
         }
         return true;
