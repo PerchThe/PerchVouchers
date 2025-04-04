@@ -10,4 +10,4 @@ tools:
     - "<white>make it unbreakable!"
 guidebook:
   commands:
-    - "sudo {PLAYER} /guide"
+    - "sudo {PLAYER} guidebook starters"
