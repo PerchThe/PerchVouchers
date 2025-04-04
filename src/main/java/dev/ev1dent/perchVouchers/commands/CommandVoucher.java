@@ -84,8 +84,6 @@ public class CommandVoucher implements CommandExecutor {
                     return true;
                 }
                 ItemStack item = player.getInventory().getItemInMainHand();
-            case "reload":
-
                 if (args[1].equalsIgnoreCase("guidebook")) {
                     ItemMeta meta = item.getItemMeta();
                     PersistentDataContainer container = meta.getPersistentDataContainer();
