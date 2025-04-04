@@ -3,6 +3,7 @@ package dev.ev1dent.perchVouchers;
 import dev.ev1dent.perchVouchers.commands.CommandVoucher;
 import dev.ev1dent.perchVouchers.commands.tabcompletion.TabCompletionCommandVoucher;
 import dev.ev1dent.perchVouchers.listeners.InventoryClickListener;
+import dev.ev1dent.perchVouchers.listeners.PlayerInteractListener;
 import dev.ev1dent.perchVouchers.utils.ConfigManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.Listener;
@@ -20,17 +21,24 @@ public final class VouchersMain extends JavaPlugin implements Listener {
     public String toolItemName;
     public List toolItemLore;
 
+    public List<String> guideBookCommands;
+
     @Override
     public void onEnable() {
         configManager.loadConfig();
 
-        getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
+        this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
         this.getCommand("perchvouchers").setExecutor(new CommandVoucher());
         this.getCommand("perchvouchers").setTabCompleter(new TabCompletionCommandVoucher());
     }
 
     public NamespacedKey getKey() {
         return new NamespacedKey(this, "generatedUUID");
+    }
+
+    public NamespacedKey getGuideBookKey() {
+        return new NamespacedKey(this, "guideBook");
     }
 
 }

@@ -23,6 +23,8 @@ public class ConfigManager {
         voucherPlugin().toolItemName = config.getString("tools.name");
         voucherPlugin().toolItemLore = config.getList("tools.lore");
 
+        voucherPlugin().guideBookCommands = config.getStringList("guidebook.commands");
+
     }
 
     private void copyDefaults(){

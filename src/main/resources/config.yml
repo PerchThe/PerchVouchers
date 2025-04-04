@@ -8,3 +8,6 @@ tools:
   lore:
     - "<white>Use on any tool to"
     - "<white>make it unbreakable!"
+guidebook:
+  commands:
+    - "sudo {PLAYER} /guide"

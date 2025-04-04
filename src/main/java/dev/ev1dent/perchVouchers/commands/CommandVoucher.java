@@ -1,22 +1,29 @@
 package dev.ev1dent.perchVouchers.commands;
 
 import dev.ev1dent.perchVouchers.VouchersMain;
+import dev.ev1dent.perchVouchers.utils.ConfigManager;
 import dev.ev1dent.perchVouchers.utils.ItemStackBuilder;
 import dev.ev1dent.perchVouchers.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
 
 public class CommandVoucher implements CommandExecutor {
+
     private VouchersMain voucherPlugin() {
         return VouchersMain.getPlugin(VouchersMain.class);
     }
 
+    ConfigManager configManager = new ConfigManager();
     Utils Utils = new Utils();
 
     @Override
@@ -65,7 +72,31 @@ public class CommandVoucher implements CommandExecutor {
                     }
                 }
             }
+            case "reload": {
+                configManager.loadConfig();
+                sender.sendMessage(Utils.formatMM("<green>Reloading config..."));
+                break;
+            }
+            case "set": {
+                if(!(sender instanceof Player player)) {
+                    return true;
+                }
+                ItemStack item = player.getInventory().getItemInMainHand();
 
+                if (args[1].equalsIgnoreCase("guidebook")) {
+                    ItemMeta meta = item.getItemMeta();
+                    PersistentDataContainer container = meta.getPersistentDataContainer();
+                    if (container.has(voucherPlugin().getGuideBookKey(), PersistentDataType.BOOLEAN)) {
+                        sender.sendMessage(Utils.formatMM("<red>This item is already a guide!"));
+                    } else {
+                        container.set(voucherPlugin().getGuideBookKey(), PersistentDataType.BOOLEAN, true);
+                        item.setItemMeta(meta);
+
+                        return true;
+                    }
+                }
+                return true;
+            }
         }
         return true;
     }

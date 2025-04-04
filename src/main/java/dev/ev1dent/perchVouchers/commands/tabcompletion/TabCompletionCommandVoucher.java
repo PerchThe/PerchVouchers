@@ -19,11 +19,20 @@ public class TabCompletionCommandVoucher implements TabCompleter {
 
         switch (args.length) {
             case 1 ->{
-                StringUtil.copyPartialMatches(args[args.length - 1], Arrays.asList("give", "reload"), completions);
+                StringUtil.copyPartialMatches(args[args.length - 1], Arrays.asList("give", "reload", "set"), completions);
                 Collections.sort(completions);
                 return completions;
             }
             case 2 ->{
+                switch (args[0].toLowerCase()) {
+                    case "give": return null;
+                    case "reload": return Collections.emptyList();
+                    case "set":  {
+                        StringUtil.copyPartialMatches(args[args.length - 1], Arrays.asList("guidebook"), completions);
+                        Collections.sort(completions);
+                        return completions;
+                    }
+                }
                 if(args[0].equalsIgnoreCase("reload")) return  Collections.emptyList();
                 else return null;
             }
