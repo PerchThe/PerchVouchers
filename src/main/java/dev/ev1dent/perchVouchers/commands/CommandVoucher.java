@@ -51,6 +51,7 @@ public class CommandVoucher implements CommandExecutor {
                                 player.getWorld().dropItem(player.getLocation(), tool);
                             }
                         }
+                        sender.sendMessage(Utils.formatMM(String.format("<green>Successfully gave %s %s %s voucher(s)", player.getName(), amount, args[2].toLowerCase())));
                         return true;
                     }
                     case "armor": {
@@ -65,6 +66,7 @@ public class CommandVoucher implements CommandExecutor {
                                 player.getWorld().dropItem(player.getLocation(), armor);
                             }
                         }
+                        sender.sendMessage(Utils.formatMM(String.format("<green>Successfully gave %s %s %s voucher(s)", player.getName(), amount, args[2].toLowerCase())));
                         return true;
                     }
                     default: {
@@ -82,6 +84,7 @@ public class CommandVoucher implements CommandExecutor {
                     return true;
                 }
                 ItemStack item = player.getInventory().getItemInMainHand();
+            case "reload":
 
                 if (args[1].equalsIgnoreCase("guidebook")) {
                     ItemMeta meta = item.getItemMeta();
