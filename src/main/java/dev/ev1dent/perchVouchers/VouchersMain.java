@@ -1,10 +1,10 @@
 package dev.ev1dent.perchVouchers;
 
-import dev.ev1dent.perchVouchers.commands.CommandVoucher;
-import dev.ev1dent.perchVouchers.commands.tabcompletion.TabCompletionCommandVoucher;
+import dev.ev1dent.perchVouchers.commands.CmdVoucher;
 import dev.ev1dent.perchVouchers.listeners.InventoryClickListener;
 import dev.ev1dent.perchVouchers.listeners.PlayerInteractListener;
 import dev.ev1dent.perchVouchers.utils.ConfigManager;
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,14 +23,20 @@ public final class VouchersMain extends JavaPlugin implements Listener {
 
     public List<String> guideBookCommands;
 
+    @SuppressWarnings("UnstableApiUsage")
+    @Override
+    public void onLoad() {
+        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, 
+            event -> event.registrar().register(new CmdVoucher().constructCommand(), "gives voucher")
+        );
+    }
+
     @Override
     public void onEnable() {
         configManager.loadConfig();
 
         this.getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
-        this.getCommand("perchvouchers").setExecutor(new CommandVoucher());
-        this.getCommand("perchvouchers").setTabCompleter(new TabCompletionCommandVoucher());
     }
 
     public NamespacedKey getKey() {

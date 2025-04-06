@@ -2,7 +2,3 @@ name: PerchVouchers
 version: '${version}'
 main: dev.ev1dent.perchVouchers.VouchersMain
 api-version: '1.21'
-commands:
-  perchvouchers:
-    description: "gives voucher"
-    permission: perchvouchers.use
