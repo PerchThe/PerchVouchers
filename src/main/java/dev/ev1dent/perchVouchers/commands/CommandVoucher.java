@@ -29,7 +29,7 @@ import java.util.List;
 
 @SuppressWarnings({"UnstableApiUsage", "SameReturnValue"})
 @NullMarked
-public final class CmdVoucher {
+public final class CommandVoucher {
 
     private VouchersMain voucherPlugin() {
         return VouchersMain.getPlugin(VouchersMain.class);
@@ -49,7 +49,7 @@ public final class CmdVoucher {
     public LiteralCommandNode<CommandSourceStack> constructCommand() {
         return Commands.literal("perchvouchers")
             .requires(source -> source.getSender().hasPermission("perchvouchers.use"))
-            
+
             .then(Commands.literal("give")
                 .then(Commands.argument("player", ArgumentTypes.player())
                     

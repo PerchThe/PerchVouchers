@@ -27,7 +27,7 @@ public final class VouchersMain extends JavaPlugin implements Listener {
     @Override
     public void onLoad() {
         this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, 
-            event -> event.registrar().register(new CmdVoucher().constructCommand(), "gives voucher")
+            event -> event.registrar().register(new CommandVoucher().constructCommand(), "gives voucher")
         );
     }
 
