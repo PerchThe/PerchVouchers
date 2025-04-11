@@ -12,6 +12,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.List;
+
 public class InventoryClickListener implements Listener {
 
     private VouchersMain voucherPlugin() {
@@ -40,20 +42,35 @@ public class InventoryClickListener implements Listener {
     }
 
     public boolean isArmor(ItemStack item) {
-        return item != null && MaterialTags.ARMOR.isTagged(item.getType());
+        return item != null && isTaggedArmor(item);
     }
 
     public boolean isTool(ItemStack item) {
         return item != null && isTaggedTool(item);
     }
 
+    public boolean isTaggedArmor(ItemStack item) {
+        List armorList = voucherPlugin().armorItemList;
+        if(armorList == null) return false;
+        return MaterialTags.ARMOR.isTagged(item) ||
+                armorList.contains(item.getType().toString());
+    }
+
     public boolean isTaggedTool(ItemStack item) {
-        return MaterialTags.WOODEN_TOOLS.isTagged(item.getType()) ||
+        return isTaggedToolMaterial(item) ||
+                MaterialTags.WOODEN_TOOLS.isTagged(item.getType()) ||
                 MaterialTags.STONE_TOOLS.isTagged(item.getType()) ||
                 MaterialTags.IRON_TOOLS.isTagged(item.getType()) ||
                 MaterialTags.GOLDEN_TOOLS.isTagged(item.getType()) ||
                 MaterialTags.DIAMOND_TOOLS.isTagged(item.getType()) ||
                 MaterialTags.NETHERITE_TOOLS.isTagged(item.getType());
+    }
+
+    public boolean isTaggedToolMaterial(ItemStack item) {
+        List list = voucherPlugin().toolItemList;
+        if(list == null) return false;
+        return list.contains(item.getType().toString());
+
     }
 
     private boolean isCustomItem(ItemStack item) {

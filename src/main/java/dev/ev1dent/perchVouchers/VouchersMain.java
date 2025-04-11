@@ -17,11 +17,13 @@ public final class VouchersMain extends JavaPlugin implements Listener {
 
     public String armorItemName;
     public List armorItemLore;
+    public List armorItemList;
 
     public String toolItemName;
     public List toolItemLore;
 
     public List<String> guideBookCommands;
+    public List toolItemList;
 
     @SuppressWarnings("UnstableApiUsage")
     @Override

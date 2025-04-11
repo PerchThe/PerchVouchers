@@ -4,6 +4,15 @@ armor:
     - "<white>Use on any armor piece to"
     - "<white>make it unbreakable!"
 tools:
+  itemlist:
+    - FLINT_AND_STEEL
+    - MACE
+    - SHEARS
+    - CROSSBOW
+    - BOW
+    - TRIDENT
+    - SHIELD
+
   name: "<gradient:#FEC300:#FFFF3A>Modifier</gradient> <dark_grey>|</dark_grey> <gradient:#FEC300:#FFFF3A>Unbreakable</gradient> <white>tools"
   lore:
     - "<white>Use on any tool to"
