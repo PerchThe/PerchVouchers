@@ -1,6 +1,6 @@
 package dev.ev1dent.perchVouchers;
 
-import dev.ev1dent.perchVouchers.commands.CmdVoucher;
+import dev.ev1dent.perchVouchers.commands.CommandVoucher;
 import dev.ev1dent.perchVouchers.listeners.InventoryClickListener;
 import dev.ev1dent.perchVouchers.listeners.PlayerInteractListener;
 import dev.ev1dent.perchVouchers.utils.ConfigManager;
