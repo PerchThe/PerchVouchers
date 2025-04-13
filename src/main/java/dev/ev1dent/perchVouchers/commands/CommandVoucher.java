@@ -21,6 +21,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jspecify.annotations.NullMarked;
 
@@ -80,9 +81,15 @@ public final class CommandVoucher {
             
             .then(Commands.literal("set")
                 .requires(source -> source.getExecutor() instanceof Player)
-                .then(Commands.literal("guidebook")
-                    .executes(this::setGuideBook)
-                )
+                    .then(Commands.literal("guidebook")
+                            .executes(this::setGuideBook)
+                    )
+                    .then(Commands.literal("unbreakable")
+                            .executes(this::setUnbreakable)
+                            .then(Commands.literal("false")
+                                    .executes(this::setBreakable)
+                            )
+                    )
             )
             .build();
     }
@@ -149,6 +156,42 @@ public final class CommandVoucher {
         }
 
         sender.sendMessage(Utils.formatMM(String.format("<green>Successfully gave %s %s %s voucher(s)", player.getName(), amount, "armor")));
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private int setUnbreakable(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        final CommandSender sender = ctx.getSource().getSender();
+        if (!(ctx.getSource().getExecutor() instanceof Player player)) {
+            return Command.SINGLE_SUCCESS;
+        }
+
+        ItemStack item = player.getInventory().getItemInMainHand();
+        ItemMeta meta = item.getItemMeta();
+        if (meta.isUnbreakable()) {
+            sender.sendMessage(Utils.formatMM("<red>This item is already unbreakable!"));
+            return Command.SINGLE_SUCCESS;
+        }
+        meta.setUnbreakable(true);
+        item.setItemMeta(meta);
+        sender.sendMessage(Utils.formatMM("<green>Successfully made item unbreakable!"));
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private int setBreakable(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        final CommandSender sender = ctx.getSource().getSender();
+        if (!(ctx.getSource().getExecutor() instanceof Player player)) {
+            return Command.SINGLE_SUCCESS;
+        }
+
+        ItemStack item = player.getInventory().getItemInMainHand();
+        ItemMeta meta = item.getItemMeta();
+        if (!meta.isUnbreakable()) {
+            sender.sendMessage(Utils.formatMM("<red>This item is already breakable!"));
+            return Command.SINGLE_SUCCESS;
+        }
+        meta.setUnbreakable(false);
+        item.setItemMeta(meta);
+        sender.sendMessage(Utils.formatMM("<green>Successfully made item breakable!"));
         return Command.SINGLE_SUCCESS;
     }
 }
