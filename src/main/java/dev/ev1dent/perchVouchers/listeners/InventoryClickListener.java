@@ -51,8 +51,7 @@ public class InventoryClickListener implements Listener {
 
     public boolean isTaggedArmor(ItemStack item) {
         List armorList = voucherPlugin().armorItemList;
-        if(armorList == null) return false;
-        return MaterialTags.ARMOR.isTagged(item) ||
+        return MaterialTags.ARMOR.isTagged(item.getType()) ||
                 armorList.contains(item.getType().toString());
     }
 
@@ -68,7 +67,6 @@ public class InventoryClickListener implements Listener {
 
     public boolean isTaggedToolMaterial(ItemStack item) {
         List list = voucherPlugin().toolItemList;
-        if(list == null) return false;
         return list.contains(item.getType().toString());
 
     }
